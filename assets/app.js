@@ -22,13 +22,14 @@
       inputHint: "숫자만 입력하세요.",
       placeholder: "예: 123",
       submit: "제출하기",
-      resultTag: "제출 완료",
-      resultTitle: "제출했어요!",
-      resultBody: "정답은 확인 후 연락드려요.",
+      slipLabel: "제출한 답",
+      resultTitle: "답안을 제출했어요!",
+      resultBody: "아직 응모 전이에요. 정답은 확인 후 연락드려요.",
+      revealKicker: "출제 정보",
       revealTitle: "이 문제, 사실 AI가 만들었어요",
       revealBody: "수학일타Q의 AI가 만든 문제입니다. 사전예약하면 이런 문제를 직접 만들어 볼 수 있어요.",
-      rewardTitle: "스타벅스 기프티콘",
-      rewardBody: "접수하면 정답 확인 뒤 보상 대상으로 안내드려요."
+      rewardTitle: "스타벅스 기프티콘 추첨",
+      rewardBody: "이름·연락처를 남기면 추첨에 응모돼요. 당첨되면 그 연락처로 안내드려요."
     },
     B: {
       tag: "오류 찾기",
@@ -37,13 +38,14 @@
       inputHint: "글로 간단히 적어 주세요.",
       placeholder: "예: n=2일 때 조건이 성립하지 않습니다.",
       submit: "제출하기",
-      resultTag: "제출 완료",
+      slipLabel: "제출한 반례",
       resultTitle: "제보해 주셔서 감사해요!",
-      resultBody: "제출하신 내용은 검토 후 연락드려요.",
+      resultBody: "아직 응모 전이에요. 제출하신 내용은 검토 후 연락드려요.",
+      revealKicker: "검증 참여",
       revealTitle: "문제 검증에 참여하셨어요",
       revealBody: "수학일타Q는 문제를 꼼꼼히 검증하려고 합니다.",
       rewardTitle: "백화점 상품권 10만 원 · 맞춤 템플릿 추첨",
-      rewardBody: "제출하신 내용은 추첨 응모로 접수됩니다."
+      rewardBody: "이름·연락처를 남기면 추첨에 응모돼요. 당첨되면 그 연락처로 안내드려요."
     }
   }[VER];
 
@@ -77,7 +79,7 @@
   }
 
   // 머리말 오른쪽: 문제 화면에서는 경과 시간, 나머지 화면에서는 단계 이름
-  var HR = { result: "제출 완료", apply: "사전예약", home: "접수 완료" };
+  var HR = { result: "제출 완료", apply: "사전예약" };
   function fmt(sec) {
     var m = Math.floor(sec / 60), s = sec % 60;
     return (m < 10 ? "0" : "") + m + ":" + (s < 10 ? "0" : "") + s;
@@ -87,7 +89,7 @@
     $("hr").textContent = "경과 " + fmt(Math.floor((Date.now() - state.shownAt) / 1000));
   }
   function show(name) {
-    ["problem", "result", "apply", "home"].forEach(function (n) {
+    ["problem", "result", "apply"].forEach(function (n) {
       $("s-" + n).classList.toggle("on", n === name);
     });
     if (name === "problem") tick(); else $("hr").textContent = HR[name];
@@ -211,15 +213,32 @@
 
   // ── 화면 2: 결과·보상 안내 ───────────────────
   function showResult() {
-    $("resultTag").textContent = TEXT.resultTag;
+    $("slipAnsLabel").textContent = TEXT.slipLabel;
+    $("slipAns").textContent = state.answer;
+    $("slipTime").textContent = fmt(state.solveSec || 0);
+    $("slipCode").textContent = SID.slice(-6).toUpperCase();
+    $("revealKicker").textContent = TEXT.revealKicker;
     $("resultTitle").textContent = TEXT.resultTitle;
     $("resultBody").textContent = TEXT.resultBody;
     $("revealTitle").textContent = TEXT.revealTitle;
     $("revealBody").textContent = TEXT.revealBody;
     $("rewardTitle").textContent = TEXT.rewardTitle;
     $("rewardBody").textContent = TEXT.rewardBody;
+    setTimeout(openModal, 900); // 제출 도장이 찍힌 뒤에 팝업
   }
-  $("toApply").addEventListener("click", function () { show("apply"); });
+  // 안내 팝업 (확인 버튼·바깥 영역·Esc로 닫힘)
+  function openModal() {
+    var m = $("modal"); m.hidden = false;
+    requestAnimationFrame(function () { m.classList.add("on"); });
+    $("modalOk").focus({ preventScroll: true });
+  }
+  function closeModal() {
+    var m = $("modal"); m.classList.remove("on");
+    setTimeout(function () { m.hidden = true; }, 200);
+  }
+  $("modal").addEventListener("click", function (e) { if (e.target.hasAttribute("data-close")) closeModal(); });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape" && !$("modal").hidden) closeModal(); });
+  $("toApply").addEventListener("click", function () { closeModal(); show("apply"); });
 
   // ── 화면 3: 개인정보 동의 + 사전예약 접수 ─────
   $("phone").addEventListener("input", function () {
@@ -242,15 +261,14 @@
       problemId: state.problem ? state.problem.id : "",
       name: name, phone: phone, consent: "Y", consentAt: new Date().toISOString()
     });
-    show("home");
+    // 접수가 끝나면 모션 인트로 → 한 페이지 소개 화면으로 (전송이 끝나도록 화면 안에서 이어짐)
+    window.IltaLanding.open({
+      code: SID.slice(-6).toUpperCase(),
+      phone: phone,
+      url: CFG.LANDING_URL,
+      onNotify: function (ts) { send("notify", { name: name, phone: phone, consent: "Y", consentAt: ts }); }
+    });
   });
-
-  // ── 화면 4: 홈 ──────────────────────────────
-  if (CFG.OPEN_URL) {
-    $("openBtn").addEventListener("click", function () { location.href = CFG.OPEN_URL; });
-  } else {
-    $("openBtn").style.display = "none"; // 사이트 주소가 정해지기 전에는 버튼을 숨김
-  }
 
   initProblem();
   show("problem");
