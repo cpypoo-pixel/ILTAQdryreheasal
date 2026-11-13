@@ -3,8 +3,8 @@
 body.ld-on{background:var(--n-bg)}
 body.ld-on .app,body.ld-on .modal{display:none!important}
 html.ld-play,html.ld-play body{overflow:hidden}
-#landing{--g:min(10vw,42px);display:none;color:var(--n-text);font-family:var(--sans);overflow-x:clip;
-  background:linear-gradient(rgba(28,33,29,.12) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),linear-gradient(90deg,rgba(28,33,29,.12) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),var(--n-bg)}
+#landing{--g:min(5vw,21px);display:none;color:var(--n-text);font-family:var(--sans);overflow-x:clip;
+  background:linear-gradient(rgba(28,33,29,.09) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),linear-gradient(90deg,rgba(28,33,29,.09) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),var(--n-bg)}
 body.ld-on #landing{display:block}
 #landing h2,#landing h3,#landing p{margin:0}
 
@@ -22,7 +22,7 @@ body.ld-on #landing{display:block}
 
 /* 인트로 오버레이: 진한 초록 → 밝은 격자 */
 .ld-intro{position:fixed;inset:0;z-index:100;background:var(--n-deep);display:flex;align-items:center;justify-content:center;transition:background-color .8s,opacity .8s}
-.ld-intro.light{background:linear-gradient(rgba(28,33,29,.12) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),linear-gradient(90deg,rgba(28,33,29,.12) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),var(--n-bg)}
+.ld-intro.light{background:linear-gradient(rgba(28,33,29,.09) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),linear-gradient(90deg,rgba(28,33,29,.09) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),var(--n-bg)}
 .ld-intro.out{opacity:0;pointer-events:none}
 .ld-intro .ld-q rect{fill:#fff}
 .ld-intro.light .ld-q rect{fill:var(--n-logo)}
@@ -60,7 +60,7 @@ body.ld-on #landing{display:block}
 #ld-bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--n-acc);z-index:90;display:none}
 body.ld-on #ld-bar{display:block}
 .sc{position:relative;height:calc(var(--h) * 1vh);height:calc(var(--h) * 1svh)}
-.sc-in{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(rgba(28,33,29,.12) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),linear-gradient(90deg,rgba(28,33,29,.12) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),var(--n-bg)}
+.sc-in{position:sticky;top:0;height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;overflow:hidden;background:linear-gradient(rgba(28,33,29,.09) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),linear-gradient(90deg,rgba(28,33,29,.09) 1px,transparent 1px) calc(50% + var(--g)/2) 0/var(--g) var(--g),var(--n-bg)}
 .wrap{position:relative;width:min(calc(100% - 48px),380px);height:100%}
 .wrap.col{height:auto;display:flex;flex-direction:column}
 .big{font-size:clamp(30px,9vw,42px);font-weight:800;line-height:1.26;letter-spacing:-.035em;margin:0}
@@ -72,17 +72,17 @@ body.ld-on #ld-bar{display:block}
 .seg.lt i::after{background:var(--n-acc)}
 
 /* 1~5. You were onto something → 모눈 칸에 조각이 붙는다 */
-.wrap.gw{width:calc(var(--g) * 10);max-width:none}
+.wrap.gw{width:calc(var(--g) * 20);max-width:none}
 .cg{position:absolute;left:0;top:0;width:100%}
 .cg>*{position:absolute;margin:0;left:0;top:0;will-change:transform,opacity;opacity:0}
 .im{display:block;overflow:hidden}
 .im img{display:block;width:100%;height:100%;object-fit:cover}
 .im:empty{background:#e8e8e2;outline:1px dashed #b4b4aa;outline-offset:-1px}
 .im:empty::after{content:attr(data-n);position:absolute;left:7px;top:5px;font-size:11px;font-weight:800;letter-spacing:.08em;color:#8f8f86}
-.wd{display:flex;align-items:center;justify-content:center;white-space:nowrap;height:calc(var(--g) * 2);background:#fff;color:#111;font-size:calc(var(--g) * .8);font-weight:800;letter-spacing:-.035em;transition:background-color .35s,color .35s}
+.wd{display:flex;align-items:center;justify-content:center;white-space:nowrap;height:calc(var(--g) * 3);background:#fff;color:#111;font-size:calc(var(--g) * 1.6);font-weight:800;letter-spacing:-.035em;transition:background-color .35s,color .35s}
 .wd.on{background:var(--n-deep);color:var(--n-logo)}
 .wd.lg{background:var(--n-logo);color:var(--n-deep)}
-.lb{display:flex;align-items:center;gap:.5em;font-size:calc(var(--g) * .46);font-weight:700;white-space:nowrap;height:var(--g)}
+.lb{display:flex;align-items:center;gap:.5em;font-size:calc(var(--g) * .92);font-weight:700;white-space:nowrap;height:calc(var(--g) * 2)}
 .lb b{position:relative;flex:none;width:1.35em;height:1.35em;border-radius:50%;background:#1c211d}
 .lb b::after{content:"";position:absolute;left:.42em;top:.22em;width:.3em;height:.55em;border:solid #fff;border-width:0 .13em .13em 0;transform:rotate(45deg)}
 .lb.run{color:#7a7f7a}
@@ -91,7 +91,8 @@ body.ld-on #ld-bar{display:block}
 @keyframes ldspin{to{transform:rotate(360deg)}}
 
 /* 6~7. 개념이 층층이 연결되는 온톨로지 → 분석 완료 시간 단축 */
-.sc.sc.dk .sc-in{background:var(--n-deep)}
+.sc.sc.dk .sc-in{background:var(--n-deep);align-items:flex-start}
+.sc.dk .wrap.col{padding-top:max(56px,11svh)}
 .hd{display:grid;color:#fff}
 .hs{grid-area:1/1;will-change:opacity,transform}
 .hd .big{color:#fff}
@@ -111,22 +112,18 @@ body.ld-on #ld-bar{display:block}
 .ng .br{fill:none;stroke:#fff;stroke-width:1.5;opacity:0}
 .ng .tx{font:600 12px/1 var(--sans);fill:#fff;opacity:0}
 .ng.hot .cl circle[data-out]{fill:var(--n-logo)}
-.tm{margin-top:12px;background:#fff;color:#111;padding:16px 18px 18px;opacity:0;will-change:transform,opacity}
-.tm-h,.tc-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:14px;font-size:15px;font-weight:600}
-.tm-h b,.tc-h b{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
 
-/* 8. 시간이 줄어드는 모습 */
-.sc.sc.dk .sc-in{background:var(--n-deep)}
-.bars{position:absolute;left:0;right:0;bottom:0;height:64%;display:flex;align-items:flex-end;gap:3px;padding:0 3px}
+/* 7~8. 시간 카드(흰색) + 뒤에서 낮아지는 막대 */
+.tm{margin-top:12px;background:#fff;color:#111;padding:18px 18px 14px;opacity:0;will-change:transform,opacity}
+.tm-h{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px;font-size:15px;font-weight:600}
+.tm-h b{font-size:25px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.tm-note{margin:12px 0 0;font-size:12px;color:var(--n-sub)}
+.bars{position:absolute;left:0;right:0;bottom:0;height:62%;display:flex;align-items:flex-end;gap:3px;padding:0 3px;opacity:0}
 .bars i{flex:1;background:#245f3d;transform-origin:50% 100%;will-change:transform}
 .bars i:nth-child(3n){background:#2d7549}
-.tmd-hd{position:absolute;left:0;right:0;top:12%;color:#fff;opacity:0}
-.tmd-hd .ld-k{color:var(--n-logo)}
-.tcard{position:absolute;left:0;right:0;top:41%;background:#fff;color:#111;padding:20px 20px 16px;opacity:0;will-change:transform,opacity}
-.tc-h{margin-bottom:16px}
-.tc-h b{font-size:26px}
-.tc-note{margin:12px 0 0;font-size:12px;color:var(--n-sub)}
-.ld-plain{display:none;padding:80px 24px;text-align:center}
+.sc.dk::before,.sc.dk::after{content:"";position:absolute;left:0;right:0;height:160px;pointer-events:none;z-index:2}
+.sc.dk::before{top:-160px;background:linear-gradient(to bottom,rgba(15,40,25,0),var(--n-deep))}
+.sc.dk::after{bottom:-160px;background:linear-gradient(to bottom,var(--n-deep),rgba(15,40,25,0))}
 
 /* E. 마무리 */
 .ld-final{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 24px}
@@ -159,11 +156,9 @@ body.ld-on #ld-bar{display:block}
 .ld-det p{margin:6px 0 0}
 .ld-err{min-height:20px;margin:12px 0 8px;color:#b3261e;font-size:13.5px}
 .ld-sh-x{display:block;width:100%;margin-top:6px;border:0;background:none;color:var(--n-sub);font:inherit;font-size:14px;padding:10px;cursor:pointer}
-@media(prefers-reduced-motion:reduce){.rv,.ld-after,.ld-tag,.ld-intro,.ld-q,.ld-q rect,.ld-lt,.ld-sheet,.ld-sheet-box{transition:none!important}.rv{opacity:1;transform:none}.ld-hint i{animation:none}}
+@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none}.ld-hint i,.lb.run b{animation:none}}
 #landing:not(.ld-ready) .ld-hero .ld-lock{visibility:hidden}
 .ld-intro.light .b{transition-delay:0s!important}
 .fchips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-top:22px}
 .fchips span{background:#fff;padding:8px 14px;font-size:13px;font-weight:700}
 .fchips b{color:var(--n-acc);letter-spacing:.04em}
-.ld-static .sc{display:none}
-.ld-static .ld-plain{display:block}
